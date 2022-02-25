@@ -3,21 +3,8 @@ Documentation for InternetArchiveBot.
 
 ## Instructions
 
-See this page for instructions on how to set up InternetArchiveBot:
+This bot requires 1 template and 1 category.  By default the category is called bad_links
+and the template is called bad link.  The template has 1 input called link_string.
 
-https://github.com/PowerpediaInterns/mediawiki-docs-InternetArchiveBot/wiki
 
-## Scripts
 
-### install-docker.sh
-
-This Bash script automates the install using the Docker method:
-
-https://github.com/PowerpediaInterns/mediawiki-docs-InternetArchiveBot/blob/master/Scripts/install-docker.sh
-
-#### Usage
-
-```bash
-chmod +x install-docker.sh
-sudo ./install-docker.sh
-```
