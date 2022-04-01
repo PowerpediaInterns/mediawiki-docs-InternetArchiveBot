@@ -15,7 +15,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 REV_PAGE = "Powerpedia:internet_archive_REV"
 CATEGORY = "bad_links"
-PAGES_LIMIT = 1
+PAGES_LIMIT = 10
 REQUEST_TIMEOUT = 5.0
 
 #Global list of all links
@@ -59,9 +59,8 @@ def check_last_page() -> str:
 
 
     #Need to replace ' with " so json.loads() can properly change it from a string to a dict.
-    page_text = page.get().replace('\'', '\"')
-    page_contents = json.loads(page_text)
-
+    page_text = page.text.replace("'", "\'")
+    page_contents = json.loads(page_text) 
     if page_contents['title']:
         return page_contents['title']
 
@@ -104,7 +103,7 @@ def get_revisions(page_title: str) -> list:
         print("No revision information found for page " + page_title + "\n")
         return ""
     rev_info = page['revisions'][0]
-
+    
     return {"user": rev_info['user'],
             "time": rev_info['timestamp'],
             "title": page_title}
@@ -116,7 +115,7 @@ def update_last_page(current_page: str) -> None:
     :param: current_page title of page to set revision information of
     :return: none
     """
-    rev = get_revisions(current_page)
+    rev = json.dumps(get_revisions(current_page))
     page = pywikibot.Page(pywikibot.Site(), title=REV_PAGE)
     page.text = rev
     page.save()
